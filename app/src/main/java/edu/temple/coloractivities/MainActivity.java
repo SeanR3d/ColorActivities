@@ -1,8 +1,8 @@
 package edu.temple.coloractivities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class PaletteActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +21,12 @@ public class PaletteActivity extends AppCompatActivity {
                 "Magenta", "Purple", "Maroon", "Black", "Gray"};
 
         // Create Adapter
-        ColorAdapter colorAdapter = new ColorAdapter(PaletteActivity.this, colors);
+        ColorAdapter colorAdapter = new ColorAdapter(MainActivity.this, colors);
 
         // Obtain spinner
         Spinner colorSpinner = findViewById(R.id.spinner);
         colorSpinner.setAdapter(colorAdapter);
+        colorSpinner.setSelection(0, false);
 
         colorSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -36,13 +37,15 @@ public class PaletteActivity extends AppCompatActivity {
                 view.setBackgroundColor(Color.WHITE);
                 ((TextView) view).setTextColor(Color.BLACK);
 
-                //set background to color
-                ConstraintLayout layout = findViewById(R.id.layout);
-
                 String colorValue = ((TextView) view).getText().toString();
-                if (colorValue.equals("Select a color")) colorValue = "White";
+                if (colorValue.equals("Select a color"))
+                    colorValue = "White";
+                else {
+                    Intent intent = new Intent(MainActivity.this, CanvasActivity.class);
+                    intent.putExtra("colorValue", colorValue);
+                    startActivity(intent);
+                }
 
-                layout.setBackgroundColor(Color.parseColor(colorValue));
             }
 
             @Override
