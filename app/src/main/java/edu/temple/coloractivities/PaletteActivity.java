@@ -10,18 +10,20 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class PaletteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle(R.string.palette_activity_title);
+
         String[] colors = {"Select a color", "Red", "Yellow", "Green", "Teal", "Cyan", "Blue",
                 "Magenta", "Purple", "Maroon", "Black", "Gray"};
 
         // Create Adapter
-        ColorAdapter colorAdapter = new ColorAdapter(MainActivity.this, colors);
+        ColorAdapter colorAdapter = new ColorAdapter(PaletteActivity.this, colors);
 
         // Obtain spinner
         Spinner colorSpinner = findViewById(R.id.spinner);
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 if (colorValue.equals("Select a color"))
                     colorValue = "White";
                 else {
-                    Intent intent = new Intent(MainActivity.this, CanvasActivity.class);
+                    Intent intent = new Intent(PaletteActivity.this, CanvasActivity.class);
                     intent.putExtra("colorValue", colorValue);
                     startActivity(intent);
                 }
