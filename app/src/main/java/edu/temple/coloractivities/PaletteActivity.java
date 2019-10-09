@@ -19,11 +19,12 @@ public class PaletteActivity extends AppCompatActivity {
 
         setTitle(R.string.palette_activity_title);
 
-        String[] colors = {"Select a color", "Red", "Yellow", "Green", "Teal", "Cyan", "Blue",
-                "Magenta", "Purple", "Maroon", "Black", "Gray"};
+//        {"Select a color", "Red", "Yellow", "Green", "Teal", "Cyan", "Blue",
+//                "Magenta", "Purple", "Maroon", "Black", "Gray"};
+        String[] colors_array = getResources().getStringArray(R.array.colors_array);
 
         // Create Adapter
-        ColorAdapter colorAdapter = new ColorAdapter(PaletteActivity.this, colors);
+        ColorAdapter colorAdapter = new ColorAdapter(PaletteActivity.this, colors_array);
 
         // Obtain spinner
         Spinner colorSpinner = findViewById(R.id.spinner);

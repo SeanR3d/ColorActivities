@@ -2,4 +2,20 @@
     <string name="app_name">Color Activities</string>
     <string name="palette_activity_title">Palette Activity</string>
     <string name="canvas_activity_title">Canvas Activity</string>
+
+    <string-array name="colors_array">
+        <item>Select a color</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Teal</item>
+        <item>Cyan</item>
+        <item>Blue</item>
+        <item>Magenta</item>
+        <item>Purple</item>
+        <item>Maroon</item>
+        <item>Black</item>
+        <item>Gray</item>
+    </string-array>
+
 </resources>
