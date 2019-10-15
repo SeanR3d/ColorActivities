@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Actividades de Color</string>
+    <string name="palette_activity_title">Actividad de Paleta</string>
+    <string name="canvas_activity_title">Actividad de Lienzo</string>
+
+    <string-array name="colors_array">
+        <item>Selecciona un color</item>
+        <item>Rojo</item>
+        <item>Amarillo</item>
+        <item>Verde</item>
+        <item>Verde azulado</item>
+        <item>Cian</item>
+        <item>Azul</item>
+        <item>Magenta</item>
+        <item>Púrpura</item>
+        <item>Marrón</item>
+        <item>Negro</item>
+        <item>Gris</item>
+    </string-array>
+
+</resources>
