@@ -24,7 +24,7 @@ public class PaletteActivity extends AppCompatActivity {
         String[] colors_array = getResources().getStringArray(R.array.colors_array);
 
         // Create Adapter
-        ColorAdapter colorAdapter = new ColorAdapter(PaletteActivity.this, colors_array);
+        final ColorAdapter colorAdapter = new ColorAdapter(PaletteActivity.this, colors_array);
 
         // Obtain spinner
         Spinner colorSpinner = findViewById(R.id.spinner);
@@ -40,10 +40,8 @@ public class PaletteActivity extends AppCompatActivity {
                 view.setBackgroundColor(Color.WHITE);
                 ((TextView) view).setTextColor(Color.BLACK);
 
-                String colorValue = ((TextView) view).getText().toString();
-                if (colorValue.equals("Select a color"))
-                    colorValue = "White";
-                else {
+                if (position != 0) {
+                    String colorValue = colorAdapter.convertColorLanguage(position);
                     Intent intent = new Intent(PaletteActivity.this, CanvasActivity.class);
                     intent.putExtra("colorValue", colorValue);
                     startActivity(intent);
@@ -57,6 +55,4 @@ public class PaletteActivity extends AppCompatActivity {
         });
 
     }
-
-
 }
