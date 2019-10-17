@@ -7,18 +7,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-public class MainActivity extends FragmentActivity implements PaletteFragment.OnColorSelectedListener{
+public class MainActivity extends FragmentActivity implements PaletteFragment.OnColorSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setTitle(R.string.palette_activity_title);
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.palette_fragment, new PaletteFragment());
+        fragmentTransaction.add(R.id.palette_fragment, new PaletteFragment()).addToBackStack(null);
+        fragmentTransaction.add(R.id.canvas_fragment, new CanvasFragment());
         fragmentTransaction.commit();
 
 
@@ -57,16 +56,50 @@ public class MainActivity extends FragmentActivity implements PaletteFragment.On
     }
 
     @Override
-    public void onAttachFragment(Fragment fragment){
-        if (fragment instanceof  PaletteFragment){
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof PaletteFragment) {
             PaletteFragment paletteFragment = (PaletteFragment) fragment;
             paletteFragment.setOnColorSelectedListener(this);
         }
+
     }
+
+//    @Override
+//    public void onResume() {
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.palette_fragment, new PaletteFragment())
+//                .addToBackStack(null)
+//                .commit();
+//        super.onResume();
+//    }
+
+//    @Override
+//    public void onBackPressed() {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        if(fragmentManager.getBackStackEntryCount() > 0) {
+//            fragmentManager.popBackStack();
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public void OnColorSelected(String colorValue) {
         //  Send color to canvas fragment
-        ;
+
+        CanvasFragment canvasFragment = (CanvasFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.canvas_fragment);
+
+        if(canvasFragment != null){
+            canvasFragment.updateCanvasView(colorValue);
+        }else{
+            CanvasFragment newFragment = CanvasFragment.newInstance(colorValue);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.canvas_fragment, newFragment)
+                    .commit();
+
+        }
+
+
     }
 }
