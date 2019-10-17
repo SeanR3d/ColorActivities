@@ -1,20 +1,13 @@
 package edu.temple.coloractivities;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements PaletteFragment.OnColorSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +18,7 @@ public class MainActivity extends FragmentActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.spinner, new PaletteFragment());
+        fragmentTransaction.add(R.id.palette_fragment, new PaletteFragment());
         fragmentTransaction.commit();
 
 
@@ -61,5 +54,19 @@ public class MainActivity extends FragmentActivity {
 
 //        });
 
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment){
+        if (fragment instanceof  PaletteFragment){
+            PaletteFragment paletteFragment = (PaletteFragment) fragment;
+            paletteFragment.setOnColorSelectedListener(this);
+        }
+    }
+
+    @Override
+    public void OnColorSelected(String colorValue) {
+        //  Send color to canvas fragment
+        ;
     }
 }
