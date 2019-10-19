@@ -1,13 +1,11 @@
 package edu.temple.coloractivities;
 
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +25,7 @@ public class PaletteFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public void setOnColorSelectedListener(OnColorSelectedListener callback){
+    public void setOnColorSelectedListener(OnColorSelectedListener callback) {
         this.callback = callback;
     }
 
@@ -63,13 +61,8 @@ public class PaletteFragment extends Fragment {
 
                 if (position != 0) {
                     String colorValue = ColorAdapter.convertColorLanguage(position);
-
                     // Send the event to the host activity
                     callback.OnColorSelected(colorValue);
-
-//                    Intent intent = new Intent(parent.getContext(), CanvasActivity.class);
-//                    intent.putExtra("colorValue", colorValue);
-//                    startActivity(intent);
                 }
 
             }
